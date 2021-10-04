@@ -19,7 +19,11 @@ let newNumber;
 inputButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (validOperation === false) {
-      displayNumber.textContent += button.textContent;
+      if (displayNumber.textContent.length < 10) { 
+        displayNumber.textContent += button.textContent;
+      } else {
+        return;
+      }
     } else {
       displayNumber.textContent = "";
       displayNumber.textContent += button.textContent;
@@ -35,7 +39,6 @@ function clearDisplay() {
   currentResult = 0;
   lastOperator = "";
   validOperation = false;
-
 }
 
 function deleteDigit() {
@@ -124,11 +127,10 @@ subtractButton.addEventListener("click", subtract);
 multiplyButton.addEventListener("click", multiply);
 divideButton.addEventListener("click", divide);
 squaredButton.addEventListener("click", squared);
+clearButton.addEventListener("click", clearDisplay);
+deleteButton.addEventListener("click", deleteDigit);
 equalButton.addEventListener("click", function () {
   number2 = Number(displayNumber.textContent);
   showResult(lastOperator);
   lastOperator = "";
 });
-
-clearButton.addEventListener("click", clearDisplay);
-deleteButton.addEventListener("click", deleteDigit);
