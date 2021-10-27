@@ -19,21 +19,21 @@ let newNumber;
 inputButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (validOperation === false) {
-      if (displayNumber.textContent.length < 10) { 
-        displayNumber.textContent += button.textContent;
+      if (displayNumber.value.length < 10) {
+        displayNumber.value += button.textContent;
       } else {
         return;
       }
     } else {
-      displayNumber.textContent = "";
-      displayNumber.textContent += button.textContent;
+      displayNumber.value = "";
+      displayNumber.value += button.textContent;
     }
     validOperation = false;
   });
 });
 
 function clearDisplay() {
-  displayNumber.textContent = "";
+  displayNumber.value = "";
   number1 = null;
   number2 = null;
   currentResult = 0;
@@ -42,8 +42,8 @@ function clearDisplay() {
 }
 
 function deleteDigit() {
-  let enteredNumber = displayNumber.textContent.slice(0, -1);
-  displayNumber.textContent = enteredNumber;
+  let enteredNumber = displayNumber.value.slice(0, -1);
+  displayNumber.value = enteredNumber;
 }
 
 function showResult(operation) {
@@ -67,15 +67,21 @@ function showResult(operation) {
     currentResult = number1 ** 2;
   }
 
-  displayNumber.textContent = currentResult;
+  if (currentResult.toString().length > 12) {
+    displayNumber.style.height = "14vh";
+  } else {
+    displayNumber.style.height = "7vh";
+  }
+
+  displayNumber.value = currentResult;
   number1 = currentResult;
 }
 
 function add() {
   if (lastOperator === "") {
-    number1 = Number(displayNumber.textContent);
+    number1 = Number(displayNumber.value);
   } else {
-    number2 = Number(displayNumber.textContent);
+    number2 = Number(displayNumber.value);
   }
   showResult(lastOperator);
   lastOperator = "+";
@@ -83,9 +89,9 @@ function add() {
 
 function subtract() {
   if (lastOperator === "") {
-    number1 = Number(displayNumber.textContent);
+    number1 = Number(displayNumber.value);
   } else {
-    number2 = Number(displayNumber.textContent);
+    number2 = Number(displayNumber.value);
   }
   showResult(lastOperator);
   lastOperator = "-";
@@ -93,9 +99,9 @@ function subtract() {
 
 function multiply() {
   if (lastOperator === "") {
-    number1 = Number(displayNumber.textContent);
+    number1 = Number(displayNumber.value);
   } else {
-    number2 = Number(displayNumber.textContent);
+    number2 = Number(displayNumber.value);
   }
   showResult(lastOperator);
   lastOperator = "*";
@@ -103,9 +109,9 @@ function multiply() {
 
 function divide() {
   if (lastOperator === "") {
-    number1 = Number(displayNumber.textContent);
+    number1 = Number(displayNumber.value);
   } else {
-    number2 = Number(displayNumber.textContent);
+    number2 = Number(displayNumber.value);
   }
   showResult(lastOperator);
   lastOperator = "/";
@@ -113,9 +119,9 @@ function divide() {
 
 function squared() {
   if (lastOperator === "") {
-    number1 = Number(displayNumber.textContent);
+    number1 = Number(displayNumber.value);
   } else {
-    number2 = Number(displayNumber.textContent);
+    number2 = Number(displayNumber.value);
   }
   showResult(lastOperator);
   showResult("**2");
@@ -127,10 +133,13 @@ subtractButton.addEventListener("click", subtract);
 multiplyButton.addEventListener("click", multiply);
 divideButton.addEventListener("click", divide);
 squaredButton.addEventListener("click", squared);
-clearButton.addEventListener("click", clearDisplay);
+clearButton.addEventListener("click", function () {
+  clearDisplay();
+  displayNumber.style.height = "7vh";
+});
 deleteButton.addEventListener("click", deleteDigit);
 equalButton.addEventListener("click", function () {
-  number2 = Number(displayNumber.textContent);
+  number2 = Number(displayNumber.value);
   showResult(lastOperator);
   lastOperator = "";
 });

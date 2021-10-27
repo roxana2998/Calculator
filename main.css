@@ -7,11 +7,23 @@
     box-sizing: border-box;
 }
 
+:root {
+    --dark-red: #aa0505;
+    --light-red: #b33a3a;
+    --orange: #ffa500;
+    --transparent-grey: #88848481;
+    --light-grey: #6d6868;
+    --green: #297029;
+    --light-green: #409740;
+    --white: #ffffff;
+    --black: #000000;
+}
+
 body {
+    margin: 0;
     width: 100%;
     min-height: 100vh;
-    margin: 0;
-    background-image: linear-gradient(rgb(243, 215, 163), rgb(207, 143, 23));
+    background-image: radial-gradient(rgb(221, 221, 221), rgb(112, 109, 109), rgb(36, 36, 36)); 
 }
 
 main {
@@ -19,12 +31,16 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 h1 {
     text-align: center;
     margin: 3rem 0;
     font-family: "Heebo", sans-serif;
+    color: var(--white);
+    margin-top: 5rem;
+    text-shadow: 1px 1px 3px #383838;
 }
 
 .container {
@@ -33,23 +49,27 @@ h1 {
     justify-content: center;
     align-items: center;
     width: 20rem;
-    background-color: black;
-    border-radius: 1rem;
+    background-color: var(--black);
+    border-radius: 0.5rem;
+    margin: 3rem auto;
+    box-shadow: 0 0 5px var(--light-grey);
 }
 
 .screen {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    text-align: end;
     width: 98%;
+    word-wrap: break-word;
     height: 7vh;
     justify-self: center;
-    background-color: black;
-    color: white;
+    background-color: var(--black);
+    color: var(--white);
     font-family: "Heebo", sans-serif;
     font-size: clamp(2.7rem, 2vw, 5rem);
     padding: 0 0.5rem;
     margin-top: 0.5rem;
+    resize: none;
+    border: none;
+    overflow: hidden;
 }
 
 .buttons-container {
@@ -72,58 +92,71 @@ button {
     cursor: pointer;
     justify-self: center;
     margin: 0.3rem;
-    color: white;
+    color: var(--white);
     font-family: "Heebo", sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
+
 
 .btn-clear {
-    background-color: #aa0505;
+    background-color: var(--dark-red);
 }
 
-.btn-clear:focus {
-    opacity: 0.9;
+.btn-clear:hover {
+    background-color: var(--white);
+    color: var(--dark-red);
+    border: 3px solid var(--dark-red);
 }
 
 .btn-delete {
-    background-color: #b33a3a;
+    background-color: var(--light-red);
+
 }
 
-.btn-delete:focus {
-    opacity: 0.9;
+.btn-delete:hover {
+    background-color: var(--white);
+    color: var(--light-red);
+    border: 3px solid var(--light-red);
+
 }
 
 .operation-btn {
-    background-color: orange;
+    background-color: var(--orange);
 }
 
-.operation-btn:focus {
-    background-color: white;
-    color: orange;
+.operation-btn:hover,
+.operation-btn:focus  {
+    background-color: var(--white);
+    color: var(--orange);
+    border: 3px solid orange;
 }
 
 .number-btn {
-    background-color: #88848481;
+    background-color: var(--transparent-grey);
 }
 
-.number-btn:focus {
-    background-color: #6d6868;
+.number-btn:hover {
+    background-color: var(--light-grey);
 }
 
 .btn-equal {
-    background-color: #297029;
+    background-color: var(--green);
     grid-column: 3 / 5;
     width: 90%;
     border-radius: 2rem;
 }
 
-.btn-equal:focus {
-    background-color: #409740;
+.btn-equal:hover {
+    background-color: var(--light-green);
 }
 
 /* -----------------------MEDIAS------ */
 
 @media (max-width: 500px) {
+    body {
+        background-image: none;
+    }
+
     h1 {
         display: none;
     }
@@ -132,15 +165,15 @@ button {
         height: 100vh;
         border-radius: 0;
         justify-content: flex-end;
+        margin: 0;
     }
     .buttons-container {
-        width: 100%;
         height: 75vh;
         margin: 0 0 0.5rem 0;
     }
     .screen {
         height: 10vh;
-        font-size: 3.5rem;
+        font-size: 3.4rem;
         margin-bottom: 1rem;
     }
     button {
@@ -151,12 +184,26 @@ button {
 }
 
 @media (max-width: 420px) {
+    
     button {
-        width: 4.8rem;
-        height: 4.8rem;
+        width: 4.7rem;
+        height: 4.7rem;
         font-size: 1.3rem;
+
     }
     .screen {
         font-size: 3rem;
+    }
+}
+
+@media (max-width: 350px) {
+    button {
+        width: 4.3rem;
+        height: 4.3rem;
+        font-size: 1.3rem;
+
+    }
+    .screen {
+        font-size: 2.4rem;
     }
 }
